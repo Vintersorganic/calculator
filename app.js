@@ -38,21 +38,20 @@ let calculation = ''
 
 function populateNumber() {
     
-    let numbers = document.querySelectorAll(".number");
-    numbers.forEach(number => {
-        console.log(typeof number.innerText)
+    let currentNumbers = document.querySelectorAll(".number");
+    currentNumbers.forEach(number => {
         number.addEventListener("click", () => {
             if (currentNumber.length < 16) {
                 currentNumber = currentNumber + number.innerText;
-                displayNumber();
+                displayCurrentNumber();
             }
-            else displayNumber()
+            else displayCurrentNumber()
         })
     });
    
 }
 
-function displayNumber() {
+function displayCurrentNumber() {
     let display = document.querySelector(".display");
     display.innerText = currentNumber;
     
@@ -60,14 +59,21 @@ function displayNumber() {
 
 
 function deleteNumbers() {
-    deleteButton = document.querySelector(".delete");
+    let deleteButton = document.querySelector(".delete");
     deleteButton.addEventListener("click", () => {
         currentNumber = currentNumber.slice(0, -1);
     })
-    
-       
 }
 
+function clearButton() {
+    let clearButton = document.querySelector(".clear")
+    clearButton.addEventListener("click", () => {
+        currentNumber = '';
+        previousNumber = '';
+    })
+}
+
+clearButton()
 populateNumber()
 deleteNumbers()
 
