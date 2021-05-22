@@ -62,7 +62,9 @@ function deleteNumbers() {
     let deleteButton = document.querySelector(".delete");
     deleteButton.addEventListener("click", () => {
         currentNumber = currentNumber.slice(0, -1);
+        displayCurrentNumber();
     })
+    
 }
 
 function clearButton() {
