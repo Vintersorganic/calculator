@@ -44,9 +44,9 @@ function populateNumber() {
         number.addEventListener("click", () => {
             if (currentNumber.length < 16) {
                 currentNumber = currentNumber + number.innerText;
-                displayNumber(currentNumber);
+                displayNumber();
             }
-            else displayNumber(currentNumber)
+            else displayNumber()
         })
     });
    
@@ -55,10 +55,21 @@ function populateNumber() {
 function displayNumber() {
     let display = document.querySelector(".display");
     display.innerText = currentNumber;
+    
+}
+
+
+function deleteNumbers() {
+    deleteButton = document.querySelector(".delete");
+    deleteButton.addEventListener("click", () => {
+        currentNumber = currentNumber.slice(0, -1);
+    })
+    
+       
 }
 
 populateNumber()
-
+deleteNumbers()
 
 
 
