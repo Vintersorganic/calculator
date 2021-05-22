@@ -41,9 +41,9 @@ function populateNumber() {
     let currentNumbers = document.querySelectorAll(".number");
     currentNumbers.forEach(number => {
         number.addEventListener("click", () => {
-            if (currentNumber.length < 16) {
-                currentNumber = currentNumber + number.innerText;
-                displayCurrentNumber();
+            if (currentNumber.length < 16) { 
+                    currentNumber = currentNumber + number.innerText;
+                    displayCurrentNumber();
             }
             else displayCurrentNumber()
         })
@@ -70,6 +70,7 @@ function clearButton() {
     clearButton.addEventListener("click", () => {
         currentNumber = '';
         previousNumber = '';
+        displayCurrentNumber()
     })
 }
 
