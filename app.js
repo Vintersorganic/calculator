@@ -68,8 +68,11 @@ function currentOperator () {
     let operators = document.querySelectorAll(".operator") 
     operators.forEach(operator => {
         operator.addEventListener("click", () => {
-            previousNumber = currentNumber;
-            currentNumber = '';
+            if (globalOperator == '') {
+                previousNumber = currentNumber;
+                currentNumber = '';
+            }
+            
             if (operator.innerText == "+") {
                 globalOperator = "add"
             }
@@ -89,19 +92,21 @@ function currentOperator () {
 function calculation() {
  let equal = document.getElementById("button-equal");
     equal.addEventListener("click", () => {
+        if (previousNumber != '' && currentNumber != '' && globalOperator != '') {
       previousNumber = Number(previousNumber);
       currentNumber = Number(currentNumber);
       let result = operate(globalOperator, previousNumber, currentNumber);
       currentNumber = result.toString()
       displayCurrentNumber();
       previousNumber = '';
-      globalOperator = '';   
+      globalOperator = ''; 
+    }  
     }) 
 }
 
+populateNumber()
 currentOperator()
 clearButton()
-populateNumber()
 deleteNumbers()
 calculation()   
 
