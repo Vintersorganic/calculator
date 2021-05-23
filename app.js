@@ -1,31 +1,15 @@
-function add(num1, num2) {
-    return num1 + num2;
-}
-
-function subtract(num1, num2) {
-    return num1 - num2;
-}
-
-function multiply(num1, num2) {
-    return num1 * num2;
-}
-
-function divide(num1, num2) {
-    return num1 / num2;
-}
-
 function operate(operator, num1, num2) {
     if (operator == "add") {
-        return add(num1,num2)
+        return num1 + num2;
     }
-    else if (operator == "subtract") {
-        return subtract(num1,num2);
+    else if (operator == "substract") {
+        return num1 - num2;
     }
     else if (operator == "multiply") {
-        return multiply(num1,num2);
+        return num1 * num2;
     }
     else {
-        return divide(num1,num2);
+        return num1 / num2;
     }
 }
 
@@ -34,7 +18,7 @@ function operate(operator, num1, num2) {
 let currentNumber = '';
 let previousNumber = '';
 let globalOperator = ''
-let calculation = ''
+let globalCalculation = '';
 
 function populateNumber() {
     let currentNumbers = document.querySelectorAll(".number");
@@ -95,14 +79,24 @@ function currentOperator () {
             }         
         }) 
     })
-    
-    displayCurrentNumber()
+}
+
+function calculation() {
+ let equal = document.getElementById("button-equal");
+    equal.addEventListener("click", () => {
+      previousNumber = Number(previousNumber);
+      currentNumber = Number(currentNumber);
+      let result = operate(globalOperator, previousNumber, currentNumber);
+      currentNumber = result.toString()
+      displayCurrentNumber();
+    }) 
 }
 
 currentOperator()
 clearButton()
 populateNumber()
 deleteNumbers()
+calculation()   
 
 
 
