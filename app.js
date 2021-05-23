@@ -33,11 +33,10 @@ function operate(operator, num1, num2) {
 
 let currentNumber = '';
 let previousNumber = '';
-let operator = ''
+let globalOperator = ''
 let calculation = ''
 
 function populateNumber() {
-    
     let currentNumbers = document.querySelectorAll(".number");
     currentNumbers.forEach(number => {
         number.addEventListener("click", () => {
@@ -54,7 +53,7 @@ function populateNumber() {
 function displayCurrentNumber() {
     let display = document.querySelector(".display");
     display.innerText = currentNumber;
-    
+  
 }
 
 
@@ -76,9 +75,35 @@ function clearButton() {
     })
 }
 
+function currentOperator () {
+    let operators = document.querySelectorAll(".operator") 
+    operators.forEach(operator => {
+        operator.addEventListener("click", () => {
+            previousNumber = currentNumber;
+            currentNumber = '';
+            if (operator.innerText == "+") {
+                globalOperator = "add"
+            }
+            else if (operator.innerText == "-") {
+                globalOperator = "substract"
+            }
+            else if (operator.innerText == "x") {
+                globalOperator = "multiply"
+            }
+            else {
+                globalOperator = "divide";
+            }         
+        }) 
+    })
+    
+    displayCurrentNumber()
+}
+
+currentOperator()
 clearButton()
 populateNumber()
 deleteNumbers()
+
 
 
 
