@@ -1,15 +1,20 @@
 function operate(operator, num1, num2) {
-    if (operator == "add") {
-        return num1 + num2;
-    }
-    else if (operator == "substract") {
-        return num1 - num2;
-    }
-    else if (operator == "multiply") {
-        return num1 * num2;
+    if (operator == '') {
+        currentNumber = '';
     }
     else {
-        return num1 / num2;
+        if (operator == "add") {
+            return num1 + num2;
+        }
+        else if (operator == "substract") {
+            return num1 - num2;
+        }
+        else if (operator == "multiply") {
+            return num1 * num2;
+        }
+        else {
+            return num1 / num2;
+        }
     }
 }
 
@@ -18,7 +23,7 @@ function operate(operator, num1, num2) {
 let currentNumber = '';
 let previousNumber = '';
 let globalOperator = ''
-let globalCalculation = '';
+
 
 function populateNumber() {
     let currentNumbers = document.querySelectorAll(".number");
@@ -89,6 +94,8 @@ function calculation() {
       let result = operate(globalOperator, previousNumber, currentNumber);
       currentNumber = result.toString()
       displayCurrentNumber();
+      previousNumber = '';
+      globalOperator = '';   
     }) 
 }
 
