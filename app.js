@@ -32,8 +32,10 @@ function populateNumber() {
             if (currentNumber.length < 16) { 
                     currentNumber = currentNumber + number.innerText;
                     displayCurrentNumber();
+                    displayPreviousNumber();
             }
-            else displayCurrentNumber()
+            else displayCurrentNumber();
+            displayPreviousNumber();
         })
     });
    
@@ -51,6 +53,7 @@ function deleteNumbers() {
     deleteButton.addEventListener("click", () => {
         currentNumber = currentNumber.slice(0, -1);
         displayCurrentNumber();
+        displayPreviousNumber()
     })
     
 }
@@ -61,6 +64,7 @@ function clearButton() {
         currentNumber = '';
         previousNumber = '';
         displayCurrentNumber()
+        displayPreviousNumber()
     })
 }
 
@@ -75,15 +79,23 @@ function currentOperator () {
             
             if (operator.innerText == "+") {
                 globalOperator = "add"
+                calculationFunction()
+                
             }
             else if (operator.innerText == "-") {
+                globalOperator = "substract";
+                calculationFunction();
                 globalOperator = "substract"
             }
             else if (operator.innerText == "x") {
+                globalOperator = "multiply";
+                calculationFunction();
                 globalOperator = "multiply"
             }
-            else {
+            else if (operator.innerText == "/"){
                 globalOperator = "divide";
+                calculationFunction();
+                globalOperator = "divide"
             }         
         }) 
     })
@@ -92,16 +104,26 @@ function currentOperator () {
 function calculation() {
  let equal = document.getElementById("button-equal");
     equal.addEventListener("click", () => {
-        if (previousNumber != '' && currentNumber != '' && globalOperator != '') {
-      previousNumber = Number(previousNumber);
-      currentNumber = Number(currentNumber);
-      let result = operate(globalOperator, previousNumber, currentNumber);
-      currentNumber = result.toString()
-      displayCurrentNumber();
-      previousNumber = '';
-      globalOperator = ''; 
-    }  
+        calculationFunction();  
     }) 
+}
+
+function calculationFunction() {
+    if (previousNumber != '' && currentNumber != '' && globalOperator != '') {
+        previousNumber = Number(previousNumber);
+        currentNumber = Number(currentNumber);
+        let result = operate(globalOperator, previousNumber, currentNumber);
+        currentNumber = result.toString()
+        displayCurrentNumber();
+        displayPreviousNumber()
+        previousNumber = '';
+        globalOperator = ''; 
+}
+}
+
+function displayPreviousNumber() {
+    let display = document.querySelector(".display-previous");
+    display.innerText = previousNumber;
 }
 
 populateNumber()
